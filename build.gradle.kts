@@ -9,7 +9,7 @@ plugins {
 
 group = "de.thm.mni"
 version = "0.0.1-SNAPSHOT"
-description = "NotesApp"
+description = "KnowledgeHub"
 
 java {
   toolchain {
