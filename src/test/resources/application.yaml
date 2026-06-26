@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: NotesApp
+
+  datasource:
+    url: jdbc:h2:mem:notesdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop

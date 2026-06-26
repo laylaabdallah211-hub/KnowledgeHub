@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: KnowledgeHub
+
+  datasource:
+    url: jdbc:h2:mem:notesdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+server:
+    port: 8080
