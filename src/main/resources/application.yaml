@@ -3,7 +3,7 @@ spring:
     name: KnowledgeHub
 
   datasource:
-    url: jdbc:h2:mem:notesdb
+    url: jdbc:h2:mem:knowledgehub
     driverClassName: org.h2.Driver
     username: sa
     password: password
@@ -13,4 +13,8 @@ spring:
       ddl-auto: create-drop
 
 server:
-    port: 8080
+  port: 8080
+
+jwt:
+  secret: "KnowledgeHubSecretKeyKnowledgeHubSecretKey123456789"
+  expiration: 86400000

@@ -34,6 +34,36 @@ interface StudyNoteRepository : CrudRepository<StudyNote, UUID> {
     @Param("id") id: UUID
   ): StudyNote?
 
+  /**
+   * Returns all favorite notes of a course.
+   */
+  @Query("""
+        SELECT n
+        FROM StudyNote n
+        WHERE n.course.id = :courseId
+        AND n.course.owner.id = :ownerId
+        AND n.favorite = true
+    """)
+  fun findFavorites(
+    @Param("courseId") courseId: UUID,
+    @Param("ownerId") ownerId: UUID
+  ): Iterable<StudyNote>
+
+  /**
+   * Returns all important notes of a course.
+   */
+  @Query("""
+        SELECT n
+        FROM StudyNote n
+        WHERE n.course.id = :courseId
+        AND n.course.owner.id = :ownerId
+        AND n.important = true
+    """)
+  fun findImportant(
+    @Param("courseId") courseId: UUID,
+    @Param("ownerId") ownerId: UUID
+  ): Iterable<StudyNote>
+
   @Modifying
   @Query("""
         DELETE

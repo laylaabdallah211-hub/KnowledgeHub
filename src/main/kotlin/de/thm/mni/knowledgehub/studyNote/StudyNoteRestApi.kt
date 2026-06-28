@@ -89,6 +89,42 @@ class StudyNoteRestApi(
       .toResponse()
   }
 
+  @PatchMapping("/{id}/favorite")
+  fun setFavorite(
+    @PathVariable studentId: UUID,
+    @PathVariable courseId: UUID,
+    @PathVariable id: UUID,
+    @RequestParam favorite: Boolean
+  ): StudyNoteResponse {
+
+    return studyNoteService
+      .setFavorite(
+        studentId,
+        courseId,
+        id,
+        favorite
+      )
+      .toResponse()
+  }
+
+  @PatchMapping("/{id}/important")
+  fun setImportant(
+    @PathVariable studentId: UUID,
+    @PathVariable courseId: UUID,
+    @PathVariable id: UUID,
+    @RequestParam important: Boolean
+  ): StudyNoteResponse {
+
+    return studyNoteService
+      .setImportant(
+        studentId,
+        courseId,
+        id,
+        important
+      )
+      .toResponse()
+  }
+
   /**
    * Deletes a study note.
    */

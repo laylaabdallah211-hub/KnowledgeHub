@@ -23,7 +23,7 @@ class `User API Integration Test - Creation`(
     val requestBody =
       """
       {
-        "email": "max.mustermann@example.com",
+        "email": "max.mustermann@example.com", 
         "password": "Str0ngP@ssword",
         "firstName": "Max",
         "lastName": "Mustermann"

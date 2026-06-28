@@ -1,29 +1,46 @@
 package de.thm.mni.knowledgehub.studyNote.dto
 
-import de.thm.mni.knowledgehub.studyNote.StudyNote
 import de.thm.mni.knowledgehub.course.Course
+import de.thm.mni.knowledgehub.studyNote.StudyNote
 import jakarta.validation.constraints.NotBlank
 import java.util.UUID
 
 /**
- * Request payload for creating a new note.
- *
- * @property title Human-readable note title.
- * @property text Main note content.
+ * Request payload for creating a new study note.
  */
 data class StudyNoteCreate(
+
   @field:NotBlank(message = "Title cannot be blank")
-  public val title: String,
+  val title: String,
+
   @field:NotBlank(message = "Text cannot be blank")
-  public val text: String,
-) {
+  val text: String,
+
   /**
-   * Converts this payload into a domain [StudyNote] instance.
+   * Whether the note should initially be marked as favorite.
    */
-  fun toStudyNote(id: UUID = UUID.randomUUID(), course: Course): StudyNote = StudyNote(
-    id = id,
-    title = title,
-    text = text,
-    course = course
-  )
+  val favorite: Boolean = false,
+
+  /**
+   * Whether the note should initially be marked as important.
+   */
+  val important: Boolean = false
+
+) {
+
+  /**
+   * Converts this DTO into a StudyNote entity.
+   */
+  fun toStudyNote(
+    id: UUID = UUID.randomUUID(),
+    course: Course
+  ): StudyNote =
+    StudyNote(
+      id = id,
+      title = title,
+      text = text,
+      favorite = favorite,
+      important = important,
+      course = course
+    )
 }

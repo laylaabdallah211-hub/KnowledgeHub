@@ -9,25 +9,39 @@ import jakarta.persistence.Table
 import java.util.UUID
 
 /**
- * Domain entity that represents a single note in a notebook.
+ * Represents a study note that belongs to a course.
  *
- * @property id Stable identifier of the note.
- * @property title Short title shown in note lists.
- * @property text Main note content.
- * @property course Notebook that owns this note.
- *
- * @throws IllegalArgumentException if [title] or [text] is blank.
+ * Students can mark notes as favorites or important
+ * to make exam preparation easier.
  */
 @Entity
 @Table(name = "notes")
 class StudyNote(
-  @Id val id: UUID,
+
+  @Id
+  val id: UUID,
+
   val title: String,
+
   val text: String,
-  @ManyToOne(fetch = FetchType.LAZY) val course: Course,
-) {
+
+  /**
+   * Whether the note is marked as a favorite.
+   */
+  var favorite: Boolean = false,
+
+  /**
+   * Whether the note is marked as important.
+   */
+  var important: Boolean = false,
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  val course: Course,
+
+  ) {
+
   init {
-    require(title.isNotBlank()) { "title cannot be blank" }
-    require(text.isNotBlank()) { "text cannot be blank" }
+    require(title.isNotBlank()) { "Title cannot be blank" }
+    require(text.isNotBlank()) { "Text cannot be blank" }
   }
 }

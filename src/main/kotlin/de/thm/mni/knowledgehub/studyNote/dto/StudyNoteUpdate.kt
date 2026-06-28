@@ -4,25 +4,40 @@ import de.thm.mni.knowledgehub.studyNote.StudyNote
 import jakarta.validation.constraints.NotBlank
 
 /**
- * Request payload for updating a note.
- * Properties are optional so callers can send only the fields they want to change.
+ * Request payload for updating a study note.
  *
- * @property title The title of a note
- * @property text The text of a note
+ * All properties are optional, allowing partial updates.
  */
 data class StudyNoteUpdate(
+
   @field:NotBlank(message = "Title cannot be blank")
-  public val title: String?,
+  val title: String?,
+
   @field:NotBlank(message = "Text cannot be blank")
-  public val text: String?,
-) {
+  val text: String?,
+
   /**
-   * Applies this payload to an existing [oldState] and returns the updated note state.
+   * Updates whether the note is marked as favorite.
+   */
+  val favorite: Boolean?,
+
+  /**
+   * Updates whether the note is marked as important.
+   */
+  val important: Boolean?
+
+) {
+
+  /**
+   * Creates a new StudyNote based on the old state while applying
+   * only the fields that were supplied by the client.
    */
   fun toStudyNote(oldState: StudyNote) = StudyNote(
     id = oldState.id,
     title = title ?: oldState.title,
     text = text ?: oldState.text,
-    course = oldState.course,
+    favorite = favorite ?: oldState.favorite,
+    important = important ?: oldState.important,
+    course = oldState.course
   )
 }

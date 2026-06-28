@@ -1,9 +1,9 @@
 spring:
   application:
-    name: NotesApp
+    name: KnowledgeHub
 
   datasource:
-    url: jdbc:h2:mem:notesdb
+    url: jdbc:h2:mem:knowledgehub
     driverClassName: org.h2.Driver
     username: sa
     password: password
@@ -11,3 +11,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+
+jwt:
+  secret: "KnowledgeHubSecretKeyKnowledgeHubSecretKey123456789"
+  expiration: 86400000
+

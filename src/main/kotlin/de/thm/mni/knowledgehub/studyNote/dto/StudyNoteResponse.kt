@@ -4,23 +4,36 @@ import de.thm.mni.knowledgehub.studyNote.StudyNote
 import java.util.UUID
 
 /**
- * API response model that represents a note.
- *
- * @property id Note unique identifier
- * @property title The title of a note
- * @property text  The text of a note
+ * API response model representing a study note.
  */
 data class StudyNoteResponse(
+
   val id: UUID,
+
   val title: String,
+
   val text: String,
+
+  /**
+   * Whether the note is marked as favorite.
+   */
+  val favorite: Boolean,
+
+  /**
+   * Whether the note is marked as important.
+   */
+  val important: Boolean
+
 )
 
 /**
- * Maps a domain [StudyNote] to the API-facing [StudyNoteResponse] format.
+ * Converts a StudyNote entity into an API response.
  */
-fun StudyNote.toResponse(): StudyNoteResponse = StudyNoteResponse(
-  id = id,
-  title = title,
-  text = text,
-)
+fun StudyNote.toResponse(): StudyNoteResponse =
+  StudyNoteResponse(
+    id = id,
+    title = title,
+    text = text,
+    favorite = favorite,
+    important = important
+  )
